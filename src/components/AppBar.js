@@ -26,6 +26,17 @@ const AppBarComponent = () => {
         <Typography align="left" variant="h6" className={classes.title}>
           MagicThreads
         </Typography>
+        <a
+          href="https://www.buymeacoffee.com/sankalpa"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+            alt="Buy Me A Coffee"
+            style={{ height: "40px", width: "170px" }}
+          />
+        </a>
         <Button color="inherit" to="/about" component={Link}>
           About
         </Button>
