@@ -1,6 +1,6 @@
 import "./App.css";
 import About from "./pages/About";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AppBarComponent from "./components/AppBar.js";
 import BodyContent from "./BodyContent";
@@ -9,18 +9,16 @@ import Footer from "./components/Footer.js";
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/">
+      <Routes>
+        <Route exact path="/" element={
           <div className="App">
             <AppBarComponent />
             <BodyContent />
-            <Footer />
+            {/* <Footer /> */}
           </div>
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-      </Switch>
+        } />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </Router>
   );
 }

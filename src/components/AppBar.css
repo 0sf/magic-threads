@@ -1,6 +1,51 @@
 .logo {
-  height: 50px;
-  width: 50px;
-  margin: 10px;
-  border-radius: 100px;
+  height: 32px;
+  margin-right: 16px;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.title {
+  flex-grow: 1;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #fff;
+  user-select: none;
+  cursor: default;
+}
+
+.coffee-button {
+  height: 36px;
+  width: auto;
+  margin-right: 16px;
+  transition: transform 0.2s ease;
+}
+
+.coffee-button:hover {
+  transform: scale(1.05);
+}
+
+.nav-button {
+  font-weight: 500 !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  color: #fff !important;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Add these styles to the parent AppBar/Toolbar */
+.MuiToolbar-root {
+  padding: 0.5rem 2rem !important;
+  background: #1976d2 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.MuiAppBar-root {
+  box-shadow: none !important;
 }

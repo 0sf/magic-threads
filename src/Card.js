@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import Editable from "./Editable";
-import { Grid, Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import copy from "copy-to-clipboard";
 import "./Card.css";
+
+import { Grid, Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+
+import copy from "copy-to-clipboard";
 
 function CardMain({ text, taID }) {
   const [copySuccess, setCopySuccess] = useState(false);

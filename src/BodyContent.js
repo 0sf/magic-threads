@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Grid, Button, Snackbar } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import Chip from "@material-ui/core/Chip";
+import { Stack, Box, Button, Snackbar, Container, Typography } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import Chip from "@mui/material/Chip";
 import insertTextAtCursor from "insert-text-at-cursor";
 
 import "./BodyContent.css";
@@ -135,75 +135,92 @@ const BodyContent = () => {
   };
 
   return (
-    <main>
-      <Grid container justify="center" direction="column">
-        <Grid item xs={10} sm={12} md={12} lg={12}>
+    <Container maxWidth="md" component="main">
+      <Stack spacing={4}>
+        <Box>
           <textarea
             id="textArea"
-            rows="20"
-            cols="70"
-            placeholder="Type your long message here."
+            rows="15"
+            placeholder="Type your long message here..."
             onPaste={(e) => setBaseText(e.target.value)}
             onChange={(e) => setBaseText(e.target.value)}
           ></textarea>
-        </Grid>
+        </Box>
 
-        <Grid container justify="center" alignItems="center">
+        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
           {emojies.map((value) => (
-            <Grid key={value} item>
-              <Chip label={value} onClick={() => insertAt(value)} />
-            </Grid>
+            <Chip 
+              key={value} 
+              label={value} 
+              onClick={() => insertAt(value)}
+              sx={{
+                '&:hover': {
+                  backgroundColor: '#e3f2fd',
+                  cursor: 'pointer'
+                }
+              }}
+            />
           ))}
-        </Grid>
+        </Stack>
 
-        <Grid container spacing={0} justify="center" alignItems="center">
-          <Grid item xs={12} sm={12} md={12} lg={3} className="button-cont">
-            <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              onClick={() => handleClick()}
-            >
-              Magic
-            </Button>
-            <Button size="small" variant="contained" onClick={createThread}>
-              Thread
-            </Button>
-            <Button size="small" variant="contained" onClick={pasteClipBoard}>
-              Paste
-            </Button>
-            <Button
-              size="small"
-              variant="contained"
-              color="secondary"
-              onClick={() => clearAll(false)}
-            >
-              Clear
-            </Button>
-          </Grid>
-        </Grid>
+        <Stack 
+          direction="row" 
+          spacing={2} 
+          justifyContent="center"
+        >
+          <Button 
+            variant="contained" 
+            onClick={() => handleClick()}
+            sx={{ 
+              textTransform: 'none',
+              minWidth: '100px'
+            }}
+          >
+            Magic
+          </Button>
+          <Button 
+            variant="outlined" 
+            onClick={createThread}
+            sx={{ 
+              textTransform: 'none',
+              minWidth: '100px'
+            }}
+          >
+            Thread
+          </Button>
+          <Button 
+            variant="outlined" 
+            onClick={pasteClipBoard}
+            sx={{ 
+              textTransform: 'none',
+              minWidth: '100px'
+            }}
+          >
+            Paste
+          </Button>
+          <Button 
+            variant="outlined" 
+            color="error" 
+            onClick={() => clearAll(false)}
+            sx={{ 
+              textTransform: 'none',
+              minWidth: '100px'
+            }}
+          >
+            Clear
+          </Button>
+        </Stack>
 
-        <Grid container justify="center" direction="column">
-          {tweets.map((tweet) => {
-            return (
-              <Grid
-                item
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-                key={tweets.indexOf(tweet)}
-              >
-                <CardMain
-                  text={tweet}
-                  key={tweet}
-                  id={tweets.indexOf(tweet)}
-                  taID={"ta" + tweets.indexOf(tweet).toString()}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
+        <Stack spacing={2}>
+          {tweets.map((tweet) => (
+            <CardMain
+              key={tweets.indexOf(tweet)}
+              text={tweet}
+              id={tweets.indexOf(tweet)}
+              taID={"ta" + tweets.indexOf(tweet).toString()}
+            />
+          ))}
+        </Stack>
 
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="warning">
@@ -215,8 +232,8 @@ const BodyContent = () => {
             Cleared
           </Alert>
         </Snackbar>
-      </Grid>
-    </main>
+      </Stack>
+    </Container>
   );
 };
 

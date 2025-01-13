@@ -1,29 +1,30 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
-import logo from "../images/logo-mt.png";
 import { Link } from "react-router-dom";
+import logo from "../images/logo-mt.png";
 import "./AppBar.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
+import { styled } from "@mui/material/styles";
+import { AppBar, Typography, Toolbar, Button } from "@mui/material";
+
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  '& .logo': {
     marginRight: theme.spacing(2),
   },
-  title: {
+  '& .title': {
     flexGrow: 1,
   },
+  '& .coffee-button': {
+    height: "40px",
+    width: "170px",
+  }
 }));
 
 const AppBarComponent = () => {
-  const classes = useStyles();
   return (
     <AppBar position="fixed">
-      <Toolbar>
+      <StyledToolbar>
         <img src={logo} alt="logo" className="logo" />
-        <Typography align="left" variant="h6" className={classes.title}>
+        <Typography align="left" variant="h6" className="title">
           MagicThreads
         </Typography>
         <a
@@ -34,13 +35,13 @@ const AppBarComponent = () => {
           <img
             src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
             alt="Buy Me A Coffee"
-            style={{ height: "40px", width: "170px" }}
+            className="coffee-button"
           />
         </a>
         <Button color="inherit" to="/about" component={Link}>
           About
         </Button>
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 };

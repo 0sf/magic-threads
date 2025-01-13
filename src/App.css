@@ -1,3 +1,7 @@
 .App {
   text-align: center;
+  margin-top: 80px; /* Adjust this value based on your AppBar height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
