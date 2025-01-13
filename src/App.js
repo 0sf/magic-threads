@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import AppBarComponent from "./components/AppBar.js";
 import BodyContent from "./BodyContent";
-import Footer from "./components/Footer.js";
+// import Footer from "./components/Footer.js";
 
 function App() {
   return (
