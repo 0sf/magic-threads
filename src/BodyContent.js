@@ -370,129 +370,195 @@ const BodyContent = () => {
           </Typography>
         </Box>
 
-        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
-          {emojies.map((value) => (
-            <Chip 
-              key={value} 
-              label={value} 
-              onClick={() => insertAt(value)}
-              sx={{
-                '&:hover': {
-                  backgroundColor: '#e3f2fd',
-                  cursor: 'pointer'
-                }
-              }}
-            />
-          ))}
-        </Stack>
+        <Stack spacing={3}>
+          {/* Emoji Selector */}
+          <Box sx={{ 
+            backgroundColor: 'background.paper',
+            borderRadius: 1,
+            p: 2,
+            boxShadow: 1
+          }}>
+            <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary' }}>
+              Quick Emojis
+            </Typography>
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+              {emojies.map((value) => (
+                <Chip 
+                  key={value} 
+                  label={value} 
+                  onClick={() => insertAt(value)}
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: '#e3f2fd',
+                      transform: 'scale(1.05)',
+                      transition: 'all 0.2s'
+                    },
+                    cursor: 'pointer'
+                  }}
+                />
+              ))}
+            </Stack>
+          </Box>
 
-        <Stack 
-          direction="row" 
-          spacing={2} 
-          justifyContent="center"
-        >
-          <LoadingButton 
-            loading={isProcessing}
-            variant="contained" 
-            onClick={() => handleClick()}
-            title="Ctrl/Cmd + M"
-            sx={{ 
-              textTransform: 'none',
-              minWidth: '100px'
-            }}
-          >
-            Magic
-          </LoadingButton>
-          <Button 
-            variant="outlined" 
-            onClick={createThread}
-            sx={{ 
-              textTransform: 'none',
-              minWidth: '100px'
-            }}
-          >
-            Thread
-          </Button>
-          <LoadingButton 
-            loading={isPasting}
-            variant="outlined" 
-            onClick={pasteClipBoard}
-            title="Ctrl/Cmd + V"
-            sx={{ textTransform: 'none', minWidth: '100px' }}
-          >
-            Paste
-          </LoadingButton>
-          <Button 
-            variant="outlined" 
-            color="error" 
-            onClick={() => clearAll(false)}
-            sx={{ 
-              textTransform: 'none',
-              minWidth: '100px'
-            }}
-          >
-            Clear
-          </Button>
-        </Stack>
+          {/* Main Action Buttons */}
+          <Box sx={{ 
+            backgroundColor: 'background.paper',
+            borderRadius: 1,
+            p: 2,
+            boxShadow: 1
+          }}>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Stack direction="row" spacing={1} flex={1}>
+                <LoadingButton 
+                  loading={isProcessing}
+                  variant="contained" 
+                  onClick={() => handleClick()}
+                  title="Ctrl/Cmd + M"
+                  sx={{ 
+                    textTransform: 'none',
+                    minWidth: '120px',
+                    backgroundColor: 'primary.main',
+                    '&:hover': {
+                      backgroundColor: 'primary.dark',
+                    }
+                  }}
+                  startIcon={<span role="img" aria-label="magic">✨</span>}
+                >
+                  Magic Thread
+                </LoadingButton>
+                <Button 
+                  variant="outlined" 
+                  onClick={createThread}
+                  sx={{ 
+                    textTransform: 'none',
+                    minWidth: '100px',
+                    borderColor: 'primary.main',
+                    color: 'primary.main',
+                    '&:hover': {
+                      borderColor: 'primary.dark',
+                      backgroundColor: 'primary.50'
+                    }
+                  }}
+                  startIcon={<span role="img" aria-label="thread">🧵</span>}
+                >
+                  Thread
+                </Button>
+              </Stack>
 
-        <Stack spacing={2}>
-          {tweets.map((tweet) => (
-            <CardMain
-              key={tweets.indexOf(tweet)}
-              text={tweet}
-              id={tweets.indexOf(tweet)}
-              taID={"ta" + tweets.indexOf(tweet).toString()}
-            />
-          ))}
-        </Stack>
+              <Stack direction="row" spacing={1}>
+                <LoadingButton 
+                  loading={isPasting}
+                  variant="outlined" 
+                  onClick={pasteClipBoard}
+                  title="Ctrl/Cmd + V"
+                  sx={{ 
+                    textTransform: 'none',
+                    minWidth: '100px',
+                    borderColor: 'grey.400',
+                    color: 'text.primary',
+                    '&:hover': {
+                      backgroundColor: 'grey.50'
+                    }
+                  }}
+                  startIcon={<span role="img" aria-label="paste">📋</span>}
+                >
+                  Paste
+                </LoadingButton>
+                <Button 
+                  variant="outlined" 
+                  color="error" 
+                  onClick={() => clearAll(false)}
+                  sx={{ 
+                    textTransform: 'none',
+                    minWidth: '100px'
+                  }}
+                  startIcon={<span role="img" aria-label="clear">🗑️</span>}
+                >
+                  Clear
+                </Button>
+              </Stack>
 
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="warning">
-            Input cannot be empty!
-          </Alert>
-        </Snackbar>
-        <Snackbar open={clear} autoHideDuration={3000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            Cleared
-          </Alert>
-        </Snackbar>
+              <Stack direction="row" spacing={1}>
+                <IconButton 
+                  onClick={undo} 
+                  disabled={historyIndex <= 0}
+                  title="Undo (Ctrl/Cmd + Z)"
+                  sx={{
+                    '&:not(:disabled):hover': {
+                      backgroundColor: 'grey.100'
+                    }
+                  }}
+                >
+                  <UndoIcon />
+                </IconButton>
+                <IconButton 
+                  onClick={redo}
+                  disabled={historyIndex >= history.length - 1}
+                  title="Redo (Ctrl/Cmd + Shift + Z)"
+                  sx={{
+                    '&:not(:disabled):hover': {
+                      backgroundColor: 'grey.100'
+                    }
+                  }}
+                >
+                  <RedoIcon />
+                </IconButton>
+              </Stack>
+            </Stack>
 
-        <Stack direction="row" spacing={2} justifyContent="center">
-          <Button
-            variant="outlined"
-            onClick={() => exportThread('txt')}
-            disabled={tweets.length === 0}
-            sx={{ textTransform: 'none' }}
+            {/* Export Button - Only show when there are tweets */}
+            {tweets.length > 0 && (
+              <Button
+                variant="outlined"
+                onClick={() => exportThread('txt')}
+                sx={{ 
+                  textTransform: 'none',
+                  mt: 2,
+                  borderColor: 'success.main',
+                  color: 'success.main',
+                  '&:hover': {
+                    borderColor: 'success.dark',
+                    backgroundColor: 'success.50'
+                  }
+                }}
+                startIcon={<span role="img" aria-label="export">📤</span>}
+              >
+                Export Thread
+              </Button>
+            )}
+          </Box>
+
+          <Stack spacing={2}>
+            {tweets.map((tweet) => (
+              <CardMain
+                key={tweets.indexOf(tweet)}
+                text={tweet}
+                id={tweets.indexOf(tweet)}
+                taID={"ta" + tweets.indexOf(tweet).toString()}
+              />
+            ))}
+          </Stack>
+
+          <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="warning">
+              Input cannot be empty!
+            </Alert>
+          </Snackbar>
+          <Snackbar open={clear} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Cleared
+            </Alert>
+          </Snackbar>
+
+          <Snackbar 
+            open={exportSuccess} 
+            autoHideDuration={2000} 
+            onClose={() => setExportSuccess(false)}
           >
-            Export Thread
-          </Button>
-        </Stack>
-
-        <Snackbar 
-          open={exportSuccess} 
-          autoHideDuration={2000} 
-          onClose={() => setExportSuccess(false)}
-        >
-          <Alert severity="success">
-            Thread exported successfully!
-          </Alert>
-        </Snackbar>
-
-        <Stack direction="row" spacing={1}>
-          <IconButton 
-            onClick={undo} 
-            disabled={historyIndex <= 0}
-            title="Undo (Ctrl/Cmd + Z)"
-          >
-            <UndoIcon />
-          </IconButton>
-          <IconButton 
-            onClick={redo}
-            disabled={historyIndex >= history.length - 1}
-            title="Redo (Ctrl/Cmd + Shift + Z)"
-          >
-            <RedoIcon />
-          </IconButton>
+            <Alert severity="success">
+              Thread exported successfully!
+            </Alert>
+          </Snackbar>
         </Stack>
       </Stack>
     </Container>

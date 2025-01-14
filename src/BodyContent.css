@@ -1,9 +1,13 @@
 .textarea-wrapper {
   position: relative;
   background: inherit;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: all 0.2s ease;
+}
+
+.textarea-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .textarea-wrapper textarea,
@@ -11,7 +15,7 @@
   width: 100%;
   padding: 20px;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -46,7 +50,7 @@
 .textarea-wrapper textarea:focus {
   outline: none;
   border-color: #1976d2;
-  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.15);
 }
 
 .highlights {
@@ -61,7 +65,7 @@
 }
 
 .highlight-chunk {
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 0;
   white-space: pre-wrap;

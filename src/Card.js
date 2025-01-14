@@ -36,7 +36,7 @@ function CardMain({ text, taID }) {
   };
 
   return (
-    <div className="outer-card">
+    <div className="outer-card" data-thread-number={`Thread ${taID.replace('ta', '') + 1}`}>
       <Editable
         taIDE={taID + "e"}
         text={text}
