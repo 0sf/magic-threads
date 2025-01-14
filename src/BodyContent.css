@@ -1,26 +1,100 @@
-textarea {
+.textarea-wrapper {
+  position: relative;
+  background: inherit;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.textarea-wrapper textarea,
+.highlights {
   width: 100%;
-  resize: none;
+  padding: 20px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.5;
-  transition: border-color 0.2s ease;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  min-height: 300px;
+  letter-spacing: normal;
+  text-align: left;
+  transition: all 0.2s ease;
 }
 
-textarea:focus {
+.textarea-wrapper textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  resize: vertical;
+  color: black;
+  background: transparent;
+  caret-color: black;
+  z-index: 2;
+  margin: 0;
+  display: block;
+}
+
+.textarea-wrapper textarea::selection {
+  background: rgba(0, 0, 255, 0.1);
+  color: transparent;
+}
+
+.textarea-wrapper textarea:focus {
   outline: none;
   border-color: #1976d2;
-  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
 }
 
-textarea::placeholder {
-  color: #757575;
+.highlights {
+  position: relative;
+  pointer-events: none;
+  color: transparent;
+  z-index: 1;
+  margin: 0;
+  border-color: transparent;
+  overflow: hidden;
+  display: block;
 }
 
-main {
-  margin: 40px auto;
-  padding: 0 16px;
+.highlight-chunk {
+  border-radius: 3px;
+  padding: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  display: inline;
+  position: relative;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Ensure scrolling synchronization */
+.textarea-wrapper textarea,
+.highlights {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Make sure both elements use identical text metrics */
+.textarea-wrapper textarea,
+.highlights,
+.highlight-chunk {
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.textarea-wrapper textarea::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.textarea-wrapper textarea {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
